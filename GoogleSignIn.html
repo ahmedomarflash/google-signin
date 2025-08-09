@@ -1,48 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <!-- Your Google Client ID -->
-  <meta name="google-signin-client_id" content="639470297173-5kcpt9sf0kk18p48ftjk5mavheopts2p.apps.googleusercontent.com">
+  <meta charset="UTF-8">
+  <title>Google Sign In</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-
-  <title>Continue with Google</title>
-  <style>
-    body { font-family: Arial, sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; }
-    .card { padding:24px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.08); text-align:center; width:320px; }
-    h2 { margin:0 0 12px 0; font-size:18px; }
-    p { font-size:13px; color:#444; margin:0 0 12px 0; }
-  </style>
 </head>
 <body>
-  <div class="card">
-    <h2>Sign in with Google</h2>
-    <p>Tap the button below to sign in.</p>
-
-    <!-- Google Identity Services Button -->
-    <div id="g_id_onload"
-         data-client_id="639470297173-5kcpt9sf0kk18p48ftjk5mavheopts2p.apps.googleusercontent.com"
-         data-callback="handleCredentialResponse"
-         data-itp_support="true">
-    </div>
-
-    <div class="g_id_signin"
-         data-type="standard"
-         data-shape="rectangular"
-         data-theme="outline"
-         data-text="continue_with"
-         data-size="large">
-    </div>
+  <h2>Sign in with Google</h2>
+  <div id="g_id_onload"
+       data-client_id="YOUR_CLIENT_ID.apps.googleusercontent.com"
+       data-callback="handleCredentialResponse"
+       data-auto_prompt="false">
+  </div>
+  <div class="g_id_signin"
+       data-type="standard"
+       data-size="large"
+       data-theme="outline"
+       data-text="sign_in_with"
+       data-shape="rect"
+       data-logo_alignment="left">
   </div>
 
   <script>
     function handleCredentialResponse(response) {
-      // Send Google token back to MIT App Inventor
+      // Send token to MIT App Inventor
       if (window.AppInventor) {
         window.AppInventor.setWebViewString(response.credential);
       } else {
-        alert("Signed in! Token: " + response.credential);
+        document.body.innerHTML = "<p>Token: " + response.credential + "</p>";
       }
     }
   </script>
